@@ -11,6 +11,7 @@ import Foundation
 
 protocol MovieServiceProtocol {
     func fetchPopularMovies() async throws -> [Movie]
+    func fetchMovieDetail(id: Int) async throws -> Movie
 }
 
 final class MovieService: MovieServiceProtocol {
@@ -27,5 +28,16 @@ final class MovieService: MovieServiceProtocol {
         let response: MovieResponse = try await NetworkManager.shared.fetch(url: url)
         
         return response.results
+    }
+    
+    func fetchMovieDetail(id: Int) async throws -> Movie {
+        let urlString = "\(baseURL)/movie/\(id)?api_key=\(apiKey)&language=tr-TR"
+        
+        guard let url = URL(string: urlString) else {
+            throw NetworkError.invalidURL
+        }
+        
+        let movie: Movie = try await NetworkManager.shared.fetch(url: url)
+        return movie
     }
 }
