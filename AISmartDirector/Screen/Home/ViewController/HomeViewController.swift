@@ -18,7 +18,7 @@ final class HomeViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         let layout = createLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .systemBackground
+        cv.backgroundColor = .black  // Siyah arka plan
         cv.delegate = self
         cv.dataSource = self
         cv.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.identifier)
@@ -27,8 +27,20 @@ final class HomeViewController: UIViewController {
     
     private let activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = .white  // Beyaz spinner
         indicator.hidesWhenStopped = true
         return indicator
+    }()
+    
+    // Gradient background için
+    private let gradientLayer: CAGradientLayer = {
+        let gradient = CAGradientLayer()
+        gradient.colors = [
+            UIColor(red: 0.05, green: 0.05, blue: 0.1, alpha: 1.0).cgColor,  // Koyu mavi-siyah
+            UIColor.black.cgColor
+        ]
+        gradient.locations = [0.0, 1.0]
+        return gradient
     }()
     
     // MARK: - Init
@@ -49,10 +61,21 @@ final class HomeViewController: UIViewController {
         loadData()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gradientLayer.frame = view.bounds
+    }
+    
     // MARK: - setupUI
     private func setupUI() {
-        view.backgroundColor = .systemBackground
+        // Gradient arka plan
+        view.layer.insertSublayer(gradientLayer, at: 0)
+        
+        // Navigation bar styling
+        setupNavigationBar()
+        
         title = "AI Smart Director"
+        
         view.addSubview(collectionView)
         view.addSubview(activityIndicator)
         
@@ -65,13 +88,42 @@ final class HomeViewController: UIViewController {
         }
     }
     
+    private func setupNavigationBar() {
+        // Koyu tema navigation bar
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(red: 0.05, green: 0.05, blue: 0.1, alpha: 0.95)
+        appearance.titleTextAttributes = [
+            .foregroundColor: UIColor.white,
+            .font: UIFont.systemFont(ofSize: 20, weight: .bold)
+        ]
+        appearance.largeTitleTextAttributes = [
+            .foregroundColor: UIColor.white,
+            .font: UIFont.systemFont(ofSize: 34, weight: .bold)
+        ]
+        
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .white
+    }
+    
     private func createLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: 140, height: 220)
-        layout.minimumLineSpacing = 16
-        layout.minimumInteritemSpacing = 8
-        layout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        
+        // Ekran genişliğine göre dinamik boyutlandırma
+        let screenWidth = UIScreen.main.bounds.width
+        let spacing: CGFloat = 16
+        let itemsPerRow: CGFloat = 2
+        let totalSpacing = spacing * (itemsPerRow + 1)
+        let itemWidth = (screenWidth - totalSpacing) / itemsPerRow
+        let itemHeight = itemWidth * 1.5  // 2:3 aspect ratio
+        
+        layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
+        layout.minimumLineSpacing = spacing
+        layout.minimumInteritemSpacing = spacing
+        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
         return layout
     }
     
@@ -111,6 +163,7 @@ extension HomeViewController {
     
     private func showErrorAlert(_ message: String) {
         let alert = UIAlertController(title: "Hata", message: message, preferredStyle: .alert)
+        alert.view.tintColor = UIColor(red: 0.8, green: 0.2, blue: 0.3, alpha: 1.0)  // Kırmızı tema
         alert.addAction(UIAlertAction(title: "Tamam", style: .default))
         present(alert, animated: true)
     }
@@ -134,7 +187,11 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let movie = movies[indexPath.item]
+        
+        // Haptic feedback
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+        
         coordinator?.showMovieDetail(movie: movie)
     }
 }
-
