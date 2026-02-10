@@ -8,23 +8,30 @@
 import Foundation
 import UIKit
 
-final class AppCoordinator {
-    
+final class AppCoordinator: Coordinator {
+
     private let window: UIWindow
-    private let navigationController = UINavigationController()
-    
+    let navigationController = UINavigationController()
+
     init(window: UIWindow) {
         self.window = window
     }
-    
+
     func start() {
-        let mainCoordinator = MainCoordinator(
-            navigationController: navigationController
-        )
-        mainCoordinator.start()
-        
+        showHome()
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
     }
-    
+
+    private func showHome() {
+        let viewModel = HomeViewModel()
+        let homeVC = HomeViewController(viewModel: viewModel)
+        homeVC.coordinator = self
+        navigationController.setViewControllers([homeVC], animated: false)
+    }
+
+    func showMovieDetail(movie: Movie) {
+        let detailVC = MovieDetailViewController(movie: movie)
+        navigationController.pushViewController(detailVC, animated: true)
+    }
 }

@@ -19,9 +19,15 @@ struct Movie: Codable, Hashable, Sendable {
     let releaseDate: String?
     let voteAverage: Double?
     
+    var posterURL: URL? {
+        guard let posterPath else { return nil }
+        return URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)")
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id, title, overview
         case posterPath = "poster_path"
         case releaseDate = "release_date"
         case voteAverage = "vote_average"
-    }}
+    }
+}

@@ -13,8 +13,8 @@ final class HomeViewController: UIViewController {
     // MARK: - Properties
     private let viewModel: HomeViewModelProtocol
     private var movies: [Movie] = []
-    weak var coordinator: HomeCoordinator?
-    
+    weak var coordinator: AppCoordinator?
+
     private lazy var collectionView: UICollectionView = {
         let layout = createLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
