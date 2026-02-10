@@ -1,0 +1,641 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		30030E092F3A2D0A002E366D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 30030E082F3A2D0A002E366D /* SnapKit */; };
+		30A648E42F3A34FA005DB1C4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 30A648E32F3A34FA005DB1C4 /* Kingfisher */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		30030DB62F35F0E0002E366D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 30030D942F35F0DF002E366D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 30030D9B2F35F0DF002E366D;
+			remoteInfo = AISmartDirector;
+		};
+		30030DC02F35F0E0002E366D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 30030D942F35F0DF002E366D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 30030D9B2F35F0DF002E366D;
+			remoteInfo = AISmartDirector;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		30030D9C2F35F0DF002E366D /* AISmartDirector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AISmartDirector.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		30030DB52F35F0E0002E366D /* AISmartDirectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AISmartDirectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		30030DBF2F35F0E0002E366D /* AISmartDirectorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AISmartDirectorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		30030DC72F35F0E0002E366D /* Exceptions for "AISmartDirector" folder in "AISmartDirector" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/Info.plist,
+				Test/AISmartDirectorTests/AISmartDirectorTests.swift,
+				Test/AISmartDirectorUITests/AISmartDirectorUITests.swift,
+				Test/AISmartDirectorUITests/AISmartDirectorUITestsLaunchTests.swift,
+			);
+			target = 30030D9B2F35F0DF002E366D /* AISmartDirector */;
+		};
+		30030DDD2F35F17C002E366D /* Exceptions for "AISmartDirector" folder in "AISmartDirectorTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Test/AISmartDirectorTests/AISmartDirectorTests.swift,
+			);
+			target = 30030DB42F35F0E0002E366D /* AISmartDirectorTests */;
+		};
+		30030DE32F35F17E002E366D /* Exceptions for "AISmartDirector" folder in "AISmartDirectorUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Test/AISmartDirectorUITests/AISmartDirectorUITests.swift,
+				Test/AISmartDirectorUITests/AISmartDirectorUITestsLaunchTests.swift,
+			);
+			target = 30030DBE2F35F0E0002E366D /* AISmartDirectorUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		30030D9E2F35F0DF002E366D /* AISmartDirector */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				30030DC72F35F0E0002E366D /* Exceptions for "AISmartDirector" folder in "AISmartDirector" target */,
+				30030DDD2F35F17C002E366D /* Exceptions for "AISmartDirector" folder in "AISmartDirectorTests" target */,
+				30030DE32F35F17E002E366D /* Exceptions for "AISmartDirector" folder in "AISmartDirectorUITests" target */,
+			);
+			path = AISmartDirector;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		30030D992F35F0DF002E366D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30A648E42F3A34FA005DB1C4 /* Kingfisher in Frameworks */,
+				30030E092F3A2D0A002E366D /* SnapKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		30030DB22F35F0E0002E366D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		30030DBC2F35F0E0002E366D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		30030D932F35F0DF002E366D = {
+			isa = PBXGroup;
+			children = (
+				30030D9E2F35F0DF002E366D /* AISmartDirector */,
+				30030D9D2F35F0DF002E366D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		30030D9D2F35F0DF002E366D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				30030D9C2F35F0DF002E366D /* AISmartDirector.app */,
+				30030DB52F35F0E0002E366D /* AISmartDirectorTests.xctest */,
+				30030DBF2F35F0E0002E366D /* AISmartDirectorUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		30030D9B2F35F0DF002E366D /* AISmartDirector */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 30030DC82F35F0E0002E366D /* Build configuration list for PBXNativeTarget "AISmartDirector" */;
+			buildPhases = (
+				30030D982F35F0DF002E366D /* Sources */,
+				30030D992F35F0DF002E366D /* Frameworks */,
+				30030D9A2F35F0DF002E366D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				30030D9E2F35F0DF002E366D /* AISmartDirector */,
+			);
+			name = AISmartDirector;
+			packageProductDependencies = (
+				30030E082F3A2D0A002E366D /* SnapKit */,
+				30A648E32F3A34FA005DB1C4 /* Kingfisher */,
+			);
+			productName = AISmartDirector;
+			productReference = 30030D9C2F35F0DF002E366D /* AISmartDirector.app */;
+			productType = "com.apple.product-type.application";
+		};
+		30030DB42F35F0E0002E366D /* AISmartDirectorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 30030DCD2F35F0E0002E366D /* Build configuration list for PBXNativeTarget "AISmartDirectorTests" */;
+			buildPhases = (
+				30030DB12F35F0E0002E366D /* Sources */,
+				30030DB22F35F0E0002E366D /* Frameworks */,
+				30030DB32F35F0E0002E366D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				30030DB72F35F0E0002E366D /* PBXTargetDependency */,
+			);
+			name = AISmartDirectorTests;
+			packageProductDependencies = (
+			);
+			productName = AISmartDirectorTests;
+			productReference = 30030DB52F35F0E0002E366D /* AISmartDirectorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		30030DBE2F35F0E0002E366D /* AISmartDirectorUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 30030DD02F35F0E0002E366D /* Build configuration list for PBXNativeTarget "AISmartDirectorUITests" */;
+			buildPhases = (
+				30030DBB2F35F0E0002E366D /* Sources */,
+				30030DBC2F35F0E0002E366D /* Frameworks */,
+				30030DBD2F35F0E0002E366D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				30030DC12F35F0E0002E366D /* PBXTargetDependency */,
+			);
+			name = AISmartDirectorUITests;
+			packageProductDependencies = (
+			);
+			productName = AISmartDirectorUITests;
+			productReference = 30030DBF2F35F0E0002E366D /* AISmartDirectorUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		30030D942F35F0DF002E366D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2600;
+				LastUpgradeCheck = 2600;
+				TargetAttributes = {
+					30030D9B2F35F0DF002E366D = {
+						CreatedOnToolsVersion = 26.0.1;
+					};
+					30030DB42F35F0E0002E366D = {
+						CreatedOnToolsVersion = 26.0.1;
+						TestTargetID = 30030D9B2F35F0DF002E366D;
+					};
+					30030DBE2F35F0E0002E366D = {
+						CreatedOnToolsVersion = 26.0.1;
+						TestTargetID = 30030D9B2F35F0DF002E366D;
+					};
+				};
+			};
+			buildConfigurationList = 30030D972F35F0DF002E366D /* Build configuration list for PBXProject "AISmartDirector" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 30030D932F35F0DF002E366D;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				30030E072F3A2D0A002E366D /* XCRemoteSwiftPackageReference "SnapKit" */,
+				30A648E22F3A34FA005DB1C4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 30030D9D2F35F0DF002E366D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				30030D9B2F35F0DF002E366D /* AISmartDirector */,
+				30030DB42F35F0E0002E366D /* AISmartDirectorTests */,
+				30030DBE2F35F0E0002E366D /* AISmartDirectorUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		30030D9A2F35F0DF002E366D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		30030DB32F35F0E0002E366D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		30030DBD2F35F0E0002E366D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		30030D982F35F0DF002E366D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		30030DB12F35F0E0002E366D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		30030DBB2F35F0E0002E366D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		30030DB72F35F0E0002E366D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 30030D9B2F35F0DF002E366D /* AISmartDirector */;
+			targetProxy = 30030DB62F35F0E0002E366D /* PBXContainerItemProxy */;
+		};
+		30030DC12F35F0E0002E366D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 30030D9B2F35F0DF002E366D /* AISmartDirector */;
+			targetProxy = 30030DC02F35F0E0002E366D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		30030DC92F35F0E0002E366D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5L38N9395T;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AISmartDirector/Resources/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eceakcay.AISmartDirector;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		30030DCA2F35F0E0002E366D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5L38N9395T;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AISmartDirector/Resources/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eceakcay.AISmartDirector;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		30030DCB2F35F0E0002E366D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 5L38N9395T;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		30030DCC2F35F0E0002E366D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 5L38N9395T;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		30030DCE2F35F0E0002E366D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5L38N9395T;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eceakcay.AISmartDirectorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AISmartDirector.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AISmartDirector";
+			};
+			name = Debug;
+		};
+		30030DCF2F35F0E0002E366D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5L38N9395T;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eceakcay.AISmartDirectorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AISmartDirector.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AISmartDirector";
+			};
+			name = Release;
+		};
+		30030DD12F35F0E0002E366D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5L38N9395T;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eceakcay.AISmartDirectorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = AISmartDirector;
+			};
+			name = Debug;
+		};
+		30030DD22F35F0E0002E366D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5L38N9395T;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eceakcay.AISmartDirectorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = AISmartDirector;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		30030D972F35F0DF002E366D /* Build configuration list for PBXProject "AISmartDirector" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30030DCB2F35F0E0002E366D /* Debug */,
+				30030DCC2F35F0E0002E366D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		30030DC82F35F0E0002E366D /* Build configuration list for PBXNativeTarget "AISmartDirector" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30030DC92F35F0E0002E366D /* Debug */,
+				30030DCA2F35F0E0002E366D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		30030DCD2F35F0E0002E366D /* Build configuration list for PBXNativeTarget "AISmartDirectorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30030DCE2F35F0E0002E366D /* Debug */,
+				30030DCF2F35F0E0002E366D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		30030DD02F35F0E0002E366D /* Build configuration list for PBXNativeTarget "AISmartDirectorUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30030DD12F35F0E0002E366D /* Debug */,
+				30030DD22F35F0E0002E366D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		30030E072F3A2D0A002E366D /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		30A648E22F3A34FA005DB1C4 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.6.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		30030E082F3A2D0A002E366D /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 30030E072F3A2D0A002E366D /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		30A648E32F3A34FA005DB1C4 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 30A648E22F3A34FA005DB1C4 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 30030D942F35F0DF002E366D /* Project object */;
+}
