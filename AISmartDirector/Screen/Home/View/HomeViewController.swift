@@ -1,3 +1,10 @@
+//
+//  HomeViewController.swift
+//  AISmartDirector
+//
+//  Created by Ece Akcay on 6.02.2026.
+//
+
 import UIKit
 import SnapKit
 
@@ -6,6 +13,7 @@ final class HomeViewController: UIViewController {
     // MARK: - Properties
     private let viewModel: HomeViewModelProtocol
     private var movies: [Movie] = []
+    weak var coordinator: HomeCoordinator?
     
     private lazy var collectionView: UICollectionView = {
         let layout = createLayout()
@@ -41,6 +49,7 @@ final class HomeViewController: UIViewController {
         loadData()
     }
     
+    // MARK: - setupUI
     private func setupUI() {
         view.backgroundColor = .systemBackground
         title = "AI Smart Director"
@@ -107,7 +116,8 @@ extension HomeViewController {
     }
 }
 
-extension HomeViewController: UICollectionViewDataSource {
+// MARK: - DataSource - ViewDelegate
+extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movies.count
     }
@@ -121,11 +131,10 @@ extension HomeViewController: UICollectionViewDataSource {
         cell.configure(with: movies[indexPath.item])
         return cell
     }
-}
-
-extension HomeViewController: UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let movie = movies[indexPath.item]
-        print("Seçilen Film: \(movie.title)")
+        coordinator?.showMovieDetail(movie: movie)
     }
 }
+

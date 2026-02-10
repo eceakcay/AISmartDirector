@@ -10,7 +10,8 @@ import SnapKit
 import Kingfisher
 
 class MovieCell: UICollectionViewCell {
-    static let identifier = "MovieCell"
+    
+    static let identifier = "MovieCell" // Tekrar kullanım için ID
     
     private let posterImageView: UIImageView = {
         let iv = UIImageView()
@@ -60,8 +61,7 @@ class MovieCell: UICollectionViewCell {
         
         if let posterPath = movie.posterPath {
             let urlString = "https://image.tmdb.org/t/p/w500\(posterPath)"
-            // Kingfisher eklediğinde:
-             posterImageView.kf.setImage(with: URL(string: urlString))
+            posterImageView.kf.setImage(with: URL(string: urlString))
             posterImageView.backgroundColor = .systemGray
         }
     }
