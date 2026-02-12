@@ -12,7 +12,10 @@ final class FavoritesViewController: UIViewController {
     
     // MARK: - Properties
     private var favoriteMovies: [Movie] = []
+    private var viewModel: FavoritesViewModelProtocol = FavoritesViewModel()
     weak var coordinator: AppCoordinator?
+    
+    // MARK: - UI
     
     private lazy var collectionView: UICollectionView = {
         let layout = createLayout()
@@ -24,15 +27,10 @@ final class FavoritesViewController: UIViewController {
         return cv
     }()
     
-    private let emptyStateView: UIView = {
-        let view = UIView()
-        view.isHidden = true
-        return view
-    }()
+    private let emptyStateView = UIView()
     
     private let emptyImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.image = UIImage(systemName: "heart.slash")
+        let iv = UIImageView(image: UIImage(systemName: "heart.slash"))
         iv.tintColor = UIColor(white: 0.3, alpha: 1.0)
         iv.contentMode = .scaleAspectFit
         return iv
@@ -50,7 +48,7 @@ final class FavoritesViewController: UIViewController {
     private let emptySubtitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Beğendiğiniz filmleri favorilere ekleyin"
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.font = .systemFont(ofSize: 14)
         label.textColor = UIColor(white: 0.3, alpha: 1.0)
         label.textAlignment = .center
         return label
@@ -62,20 +60,21 @@ final class FavoritesViewController: UIViewController {
             UIColor(red: 0.05, green: 0.05, blue: 0.1, alpha: 1.0).cgColor,
             UIColor.black.cgColor
         ]
-        gradient.locations = [0.0, 1.0]
         return gradient
     }()
     
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupNavigationBar()
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadFavorites()
+        viewModel.loadFavorites()
     }
     
     override func viewDidLayoutSubviews() {
@@ -84,6 +83,7 @@ final class FavoritesViewController: UIViewController {
     }
     
     // MARK: - Setup
+    
     private func setupUI() {
         view.layer.insertSublayer(gradientLayer, at: 0)
         
@@ -94,9 +94,7 @@ final class FavoritesViewController: UIViewController {
         emptyStateView.addSubview(emptyLabel)
         emptyStateView.addSubview(emptySubtitleLabel)
         
-        collectionView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
-        }
+        collectionView.snp.makeConstraints { $0.edges.equalTo(view.safeAreaLayoutGuide) }
         
         emptyStateView.snp.makeConstraints { make in
             make.center.equalToSuperview()
@@ -106,7 +104,7 @@ final class FavoritesViewController: UIViewController {
         emptyImageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
-            make.width.height.equalTo(100)
+            make.size.equalTo(100)
         }
         
         emptyLabel.snp.makeConstraints { make in
@@ -123,56 +121,54 @@ final class FavoritesViewController: UIViewController {
     
     private func setupNavigationBar() {
         title = "Favorilerim"
-        
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(red: 0.05, green: 0.05, blue: 0.1, alpha: 0.95)
-        appearance.titleTextAttributes = [
-            .foregroundColor: UIColor.white,
-            .font: UIFont.systemFont(ofSize: 20, weight: .bold)
-        ]
-        appearance.largeTitleTextAttributes = [
-            .foregroundColor: UIColor.white,
-            .font: UIFont.systemFont(ofSize: 34, weight: .bold)
-        ]
-        
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.tintColor = .white
     }
     
     private func createLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        
-        let screenWidth = UIScreen.main.bounds.width
         let spacing: CGFloat = 16
         let itemsPerRow: CGFloat = 2
-        let totalSpacing = spacing * (itemsPerRow + 1)
-        let itemWidth = (screenWidth - totalSpacing) / itemsPerRow
-        let itemHeight = itemWidth * 1.5
         
-        layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
+        let totalSpacing = spacing * (itemsPerRow + 1)
+        let width = (UIScreen.main.bounds.width - totalSpacing) / itemsPerRow
+        let height = width * 1.5
+        
+        layout.itemSize = CGSize(width: width, height: height)
         layout.minimumLineSpacing = spacing
         layout.minimumInteritemSpacing = spacing
         layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+        
         return layout
     }
     
-    // MARK: - Data Loading
-    private func loadFavorites() {
-        // Burada favorilerinizi yükleyin
-        // Örnek: FavoritesManager'dan favori ID'leri alıp, API'den filmleri çekin
-        
-        let favoriteIds = FavoritesManager.shared.getFavorites()
-        
-        // TODO: Bu ID'lerle filmleri API'den çekin
-        // Şimdilik boş liste
-        favoriteMovies = []
-        
-        updateEmptyState()
-        collectionView.reloadData()
+    private func bindViewModel() {
+        viewModel.onStateChange = { [weak self] state in
+            guard let self else { return }
+            
+            DispatchQueue.main.async {
+                switch state {
+                    
+                case .idle:
+                    break
+                    
+                case .loading:
+                    break
+                    
+                case .empty:
+                    self.favoriteMovies = []
+                    self.updateEmptyState()
+                    self.collectionView.reloadData()
+                    
+                case .loaded(let movies):
+                    self.favoriteMovies = movies
+                    self.updateEmptyState()
+                    self.collectionView.reloadData()
+                    
+                case .error(let message):
+                    print("Favorites Error:", message)
+                }
+            }
+        }
     }
     
     private func updateEmptyState() {
@@ -181,6 +177,7 @@ final class FavoritesViewController: UIViewController {
         collectionView.isHidden = isEmpty
     }
 }
+
 
 // MARK: - CollectionView DataSource & Delegate
 extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewDelegate {

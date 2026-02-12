@@ -10,27 +10,53 @@ import UIKit
 
 final class AppCoordinator: Coordinator {
     
+    var navigationController: UINavigationController
     private let window: UIWindow
-    let navigationController = UINavigationController()
+    private var tabBarController: MainTabBarController?
     
     init(window: UIWindow) {
         self.window = window
+        self.navigationController = UINavigationController()
     }
     
     func start() {
-        showHome()
-        window.rootViewController = navigationController
+        setupTabBar()
+        window.rootViewController = tabBarController
         window.makeKeyAndVisible()
     }
     
-    private func showHome() {
-        let viewModel = HomeViewModel()
-        let homeVC = HomeViewController(viewModel: viewModel)
+    private func setupTabBar() {
+        // Tab Bar Controller oluştur
+        let tabBarController = MainTabBarController()
+        tabBarController.coordinator = self
+        self.tabBarController = tabBarController
+        
+        // 🏠 Home ViewController
+        let homeViewModel = HomeViewModel()
+        let homeVC = HomeViewController(viewModel: homeViewModel)
         homeVC.coordinator = self
-        navigationController.setViewControllers([homeVC], animated: false)
+        let homeNavController = UINavigationController(rootViewController: homeVC)
+        
+        // ❤️ Favorites ViewController
+        let favoritesVC = FavoritesViewController()
+        favoritesVC.coordinator = self
+        let favoritesNavController = UINavigationController(rootViewController: favoritesVC)
+        
+        // Tab Bar'a ekle
+        tabBarController.setupViewControllers(home: homeNavController, favorites: favoritesNavController)
     }
     
-    //DEEPLİNK eklentisi
+    // MARK: - Navigation
+    func showMovieDetail(movie: Movie) {
+        let detailVC = MovieDetailViewController(movie: movie)
+        
+        // Aktif tab'ın navigation controller'ını bul
+        if let selectedNav = tabBarController?.selectedViewController as? UINavigationController {
+            selectedNav.pushViewController(detailVC, animated: true)
+        }
+    }
+    
+    // MARK: - Deeplink
     func handleDeeplink(_ url: URL) {
         guard
             url.scheme == "aismartdirector",
@@ -47,16 +73,20 @@ final class AppCoordinator: Coordinator {
         Task {
             do {
                 let movie = try await MovieService().fetchMovieDetail(id: movieId)
-                let detailVC = MovieDetailViewController(movie: movie)
-                navigationController.pushViewController(detailVC, animated: true)
+                
+                // Home tab'ına geç ve detayı göster
+                tabBarController?.selectedIndex = 0
+                
+                if let selectedNav = tabBarController?.selectedViewController as? UINavigationController {
+                    // Root'a dön
+                    selectedNav.popToRootViewController(animated: false)
+                    // Detay sayfasını aç
+                    let detailVC = MovieDetailViewController(movie: movie)
+                    selectedNav.pushViewController(detailVC, animated: true)
+                }
             } catch {
                 print("DEEPLINK ERROR:", error)
             }
         }
-    }
-    
-    func showMovieDetail(movie: Movie) {
-        let detailVC = MovieDetailViewController(movie: movie)
-        navigationController.pushViewController(detailVC, animated: true)
     }
 }

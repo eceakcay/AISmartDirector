@@ -74,7 +74,7 @@ final class HomeViewController: UIViewController {
         // Navigation bar styling
         setupNavigationBar()
         
-        title = "AI Smart Director"
+        title = "Home"
         
         view.addSubview(collectionView)
         view.addSubview(activityIndicator)
