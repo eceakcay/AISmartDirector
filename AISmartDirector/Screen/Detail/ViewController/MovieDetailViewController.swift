@@ -13,6 +13,7 @@ final class MovieDetailViewController: UIViewController {
     
     //MARK: - Properties
     private let movie: Movie
+    private let favoritesManager = FavoritesManager.shared
     
     // MARK: - UI Components
     private let scrollView: UIScrollView = {
@@ -179,17 +180,57 @@ final class MovieDetailViewController: UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.tintColor = .white
         
-        // Back button
+        // Back button (sol)
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "chevron.left"),
             style: .plain,
             target: self,
             action: #selector(backButtonTapped)
         )
+        
+        // ✅ Favorite button (sağ)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "heart"),
+            style: .plain,
+            target: self,
+            action: #selector(favoriteTapped)
+        )
+        
+        updateFavoriteUI()
     }
     
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    private func updateFavoriteUI() {
+        let isFav = favoritesManager.isFavorite(id: movie.id)
+        let imageName = isFav ? "heart.fill" : "heart"
+        
+        // ✅ Navigation bar item'ı güncelle
+        navigationItem.rightBarButtonItem?.image = UIImage(systemName: imageName)
+        
+        // Renk değişimi (opsiyonel)
+        navigationItem.rightBarButtonItem?.tintColor = isFav ? .systemPink : .white
+    }
+    
+    @objc private func favoriteTapped() {
+        FavoritesManager.shared.toggleFavorite(id: movie.id)
+        updateFavoriteUI()
+        
+        // ✅ Haptic feedback
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+        
+        // ✅ Animasyon efekti
+        UIView.animate(withDuration: 0.1,
+                       animations: {
+                           self.navigationItem.rightBarButtonItem?.customView?.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+                       }) { _ in
+            UIView.animate(withDuration: 0.1) {
+                self.navigationItem.rightBarButtonItem?.customView?.transform = .identity
+            }
+        }
     }
     
     // MARK: - UI Setup
@@ -328,5 +369,7 @@ final class MovieDetailViewController: UIViewController {
                 )
             ]
         )
+        
+        updateFavoriteUI()
     }
 }

@@ -30,7 +30,7 @@ final class AppCoordinator: Coordinator {
         navigationController.setViewControllers([homeVC], animated: false)
     }
     
-    //DEEPLİNK
+    //DEEPLİNK eklentisi
     func handleDeeplink(_ url: URL) {
         guard
             url.scheme == "aismartdirector",
