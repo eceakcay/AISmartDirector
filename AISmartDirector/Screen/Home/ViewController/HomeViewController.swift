@@ -57,6 +57,7 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupAIButton()
         bindViewModel()
         loadData()
     }
@@ -107,6 +108,20 @@ final class HomeViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .white
     }
+    
+    private func setupAIButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "sparkles"),
+            style: .plain,
+            target: self,
+            action: #selector(aiTapped)
+        )
+    }
+    
+    @objc private func aiTapped() {
+        coordinator?.showAIPrompt()
+    }
+
     
     private func createLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()

@@ -89,4 +89,70 @@ final class AppCoordinator: Coordinator {
             }
         }
     }
+    
+    // MARK: - AI Recommendation
+    func generateAIRecommendation(prompt: String) {
+        let aiService = AIService()
+        let movieService = MovieService()
+
+        Task {
+            do {
+                let categories = try await aiService.extractCategories(from: prompt)
+                let movies = try await fetchMovies(for: categories, movieService: movieService)
+                
+                // ✅ Prompt'u da geç
+                showAIResult(prompt: prompt, movies: movies)
+
+            } catch {
+                print("AI ERROR:", error)
+            }
+        }
+    }
+
+    private func showAIResult(prompt: String, movies: [Movie]) { // ✅ Param ekledik
+        let vc = AIResultViewController(
+            prompt: prompt,
+            movies: movies
+        )
+
+        vc.coordinator = self
+
+        if let selectedNav = tabBarController?.selectedViewController as? UINavigationController {
+            selectedNav.pushViewController(vc, animated: true)
+        }
+    }
+    
+    
+    private func fetchMovies(
+        for categories: [String],
+        movieService: MovieService
+    ) async throws -> [Movie] {
+
+        try await withThrowingTaskGroup(of: [Movie].self) { group in
+            
+            for category in categories {
+                group.addTask {
+                    try await movieService.fetchMovies(by: category)
+                }
+            }
+            
+            var results: [Movie] = []
+            
+            for try await movies in group {
+                results.append(contentsOf: movies)
+            }
+            
+            return results
+        }
+    }
+    
+    
+    func showAIPrompt() {
+        let vc = AIPromptViewController()
+        vc.coordinator = self
+        
+        if let selectedNav = tabBarController?.selectedViewController as? UINavigationController {
+            selectedNav.pushViewController(vc, animated: true)
+        }
+    }
 }

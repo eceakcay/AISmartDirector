@@ -12,6 +12,7 @@ import Foundation
 protocol MovieServiceProtocol {
     func fetchPopularMovies() async throws -> [Movie]
     func fetchMovieDetail(id: Int) async throws -> Movie
+    func fetchMovies(by genre: String) async throws -> [Movie]
 }
 
 final class MovieService: MovieServiceProtocol {
@@ -40,4 +41,34 @@ final class MovieService: MovieServiceProtocol {
         let movie: Movie = try await NetworkManager.shared.fetch(url: url)
         return movie
     }
+    
+    func fetchMovies(by genre: String) async throws -> [Movie] {
+        
+        let genreMap: [String: Int] = [
+            "action": 28,
+            "drama": 18,
+            "romance": 10749,
+            "comedy": 35,
+            "family": 10751,
+            "thriller": 53,
+            "horror": 27
+        ]
+        
+        guard let genreId = genreMap[genre.lowercased()] else {
+            return []
+        }
+        
+        let urlString =
+        "\(baseURL)/discover/movie?api_key=\(apiKey)&with_genres=\(genreId)&language=tr-TR&page=1"
+        
+        guard let url = URL(string: urlString) else {
+            throw NetworkError.invalidURL
+        }
+        
+        let response: MovieResponse =
+            try await NetworkManager.shared.fetch(url: url)
+        
+        return response.results
+    }
+
 }
