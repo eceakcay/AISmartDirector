@@ -13,7 +13,7 @@ protocol AIServiceProtocol {
 
 final class AIService: AIServiceProtocol {
     
-    private let apiKey = ""
+    private let apiKey = ConfigurationManager.geminiAPIKey
     private let baseUrl = "https://generativelanguage.googleapis.com"
 
     func extractCategories(from prompt: String) async throws -> [String] {

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		30030E092F3A2D0A002E366D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 30030E082F3A2D0A002E366D /* SnapKit */; };
 		30A648E42F3A34FA005DB1C4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 30A648E32F3A34FA005DB1C4 /* Kingfisher */; };
+		30A649062F3F6275005DB1C4 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30A649052F3F6275005DB1C4 /* Secrets.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +33,7 @@
 		30030D9C2F35F0DF002E366D /* AISmartDirector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AISmartDirector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30030DB52F35F0E0002E366D /* AISmartDirectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AISmartDirectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		30030DBF2F35F0E0002E366D /* AISmartDirectorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AISmartDirectorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		30A649052F3F6275005DB1C4 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -105,6 +107,7 @@
 		30030D932F35F0DF002E366D = {
 			isa = PBXGroup;
 			children = (
+				30A649052F3F6275005DB1C4 /* Secrets.plist */,
 				30030D9E2F35F0DF002E366D /* AISmartDirector */,
 				30030D9D2F35F0DF002E366D /* Products */,
 			);
@@ -240,6 +243,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30A649062F3F6275005DB1C4 /* Secrets.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
