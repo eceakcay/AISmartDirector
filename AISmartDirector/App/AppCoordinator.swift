@@ -127,23 +127,16 @@ final class AppCoordinator: Coordinator {
         for categories: [String],
         movieService: MovieService
     ) async throws -> [Movie] {
-
-        try await withThrowingTaskGroup(of: [Movie].self) { group in
-            
-            for category in categories {
-                group.addTask {
-                    try await movieService.fetchMovies(by: category)
-                }
-            }
-            
-            var results: [Movie] = []
-            
-            for try await movies in group {
-                results.append(contentsOf: movies)
-            }
-            
-            return results
-        }
+        
+        // 1. Kategorileri ID'lere çeviriyoruz
+        let genreIds = GenreMapper.mapNamesToIds(categories)
+        
+        // 2. Eğer ID bulunamazsa boş dön
+        guard !genreIds.isEmpty else { return [] }
+        
+        // 3. MovieService içindeki yeni metodu çağırıyoruz
+        // Not: MovieService içinde bu metodun adının 'fetchMoviesByGenreIDs' olduğundan emin ol
+        return try await movieService.fetchMoviesByGenreIDs(genreIds)
     }
     
     

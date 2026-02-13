@@ -12,63 +12,39 @@ import Foundation
 protocol MovieServiceProtocol {
     func fetchPopularMovies() async throws -> [Movie]
     func fetchMovieDetail(id: Int) async throws -> Movie
-    func fetchMovies(by genre: String) async throws -> [Movie]
+    // Yeni: Birden fazla genre ID'si ile film keşfetmek için
+    func fetchMoviesByGenreIDs(_ ids: [Int]) async throws -> [Movie]
 }
 
 final class MovieService: MovieServiceProtocol {
     private let apiKey = "542ff9c1fdba20c0bc20d7698b98de01"
     private let baseURL = "https://api.themoviedb.org/3"
     
-    func fetchPopularMovies() async throws-> [Movie] {
-        
+    // Mevcut popüler filmler fonksiyonun
+    func fetchPopularMovies() async throws -> [Movie] {
         let urlString = "\(baseURL)/movie/popular?api_key=\(apiKey)&language=tr-TR&page=1"
-        
-        guard let url = URL(string: urlString) else {
-            throw NetworkError.invalidURL
-        }
+        guard let url = URL(string: urlString) else { throw NetworkError.invalidURL }
         let response: MovieResponse = try await NetworkManager.shared.fetch(url: url)
-        
         return response.results
     }
     
+    // Mevcut detay fonksiyonun
     func fetchMovieDetail(id: Int) async throws -> Movie {
         let urlString = "\(baseURL)/movie/\(id)?api_key=\(apiKey)&language=tr-TR"
-        
-        guard let url = URL(string: urlString) else {
-            throw NetworkError.invalidURL
-        }
-        
-        let movie: Movie = try await NetworkManager.shared.fetch(url: url)
-        return movie
+        guard let url = URL(string: urlString) else { throw NetworkError.invalidURL }
+        return try await NetworkManager.shared.fetch(url: url)
     }
     
-    func fetchMovies(by genre: String) async throws -> [Movie] {
+    // MARK: - AI Destekli Tür Arama
+    func fetchMoviesByGenreIDs(_ ids: [Int]) async throws -> [Movie] {
+        // TMDB birden fazla türü virgül ile ayırarak kabul eder (Örn: 28,18)
+        let genreString = ids.map { String($0) }.joined(separator: ",")
         
-        let genreMap: [String: Int] = [
-            "action": 28,
-            "drama": 18,
-            "romance": 10749,
-            "comedy": 35,
-            "family": 10751,
-            "thriller": 53,
-            "horror": 27
-        ]
+        // 'discover/movie' endpoint'ini kullanarak türe göre filtreleme yapıyoruz
+        let urlString = "\(baseURL)/discover/movie?api_key=\(apiKey)&with_genres=\(genreString)&language=tr-TR&sort_by=popularity.desc&page=1"
         
-        guard let genreId = genreMap[genre.lowercased()] else {
-            return []
-        }
-        
-        let urlString =
-        "\(baseURL)/discover/movie?api_key=\(apiKey)&with_genres=\(genreId)&language=tr-TR&page=1"
-        
-        guard let url = URL(string: urlString) else {
-            throw NetworkError.invalidURL
-        }
-        
-        let response: MovieResponse =
-            try await NetworkManager.shared.fetch(url: url)
-        
+        guard let url = URL(string: urlString) else { throw NetworkError.invalidURL }
+        let response: MovieResponse = try await NetworkManager.shared.fetch(url: url)
         return response.results
     }
-
 }
