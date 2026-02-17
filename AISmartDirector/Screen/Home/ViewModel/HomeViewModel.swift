@@ -10,7 +10,7 @@ import Foundation
 protocol HomeViewModelProtocol: AnyObject {
     var onStateChange: ((HomeViewState) -> Void)? { get set }
     func loadMovies() async
-    func searchMoviesByMood(text: String) async // Yeni: AI destekli arama
+    func searchMoviesByTitle(text: String) async // İsme göre arama
 }
 
 @MainActor
@@ -21,8 +21,7 @@ final class HomeViewModel: HomeViewModelProtocol {
     private let aiService: AIServiceProtocol // Yeni: AI Servisi eklendi
     
     // Bağımlılıkları init içinde enjekte ediyoruz
-    init(service: MovieServiceProtocol = MovieService(),
-         aiService: AIServiceProtocol = AIService()) {
+    init(service: MovieServiceProtocol = MovieService(), aiService: AIServiceProtocol = AIService()) {
         self.movieService = service
         self.aiService = aiService
     }
@@ -67,6 +66,26 @@ final class HomeViewModel: HomeViewModelProtocol {
         } catch {
             print("🚨 AI Arama Hatası: \(error)")
             onStateChange?(.error("Üzgünüm, sana uygun filmleri şu an bulamıyorum."))
+        }
+    }
+    // MARK: - Search Film
+    func searchMoviesByTitle(text: String) async {
+        guard !text.isEmpty else {
+            await loadMovies() // Arama metni boşsa popüler filmlere dön
+            return
+        }
+        onStateChange?(.loading)
+        
+        do {
+            let searchResults = try await movieService.searchMovieByName(query: text)
+            
+            if searchResults.isEmpty {
+                onStateChange?(.error("Bu isimle bir film bulunamadı."))
+            } else {
+                onStateChange?(.loaded(searchResults))
+            }
+        } catch {
+            onStateChange?(.error("Arama yapılırken bir hata oluştu."))
         }
     }
 }

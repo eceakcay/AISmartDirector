@@ -14,6 +14,7 @@ final class HomeViewController: UIViewController {
     private let viewModel: HomeViewModelProtocol
     private var movies: [Movie] = []
     weak var coordinator: AppCoordinator?
+    private let searchController = UISearchController(searchResultsController: nil)
 
     private lazy var collectionView: UICollectionView = {
         let layout = createLayout()
@@ -57,6 +58,7 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupSearchController()
         setupAIButton()
         bindViewModel()
         loadData()
@@ -65,6 +67,20 @@ final class HomeViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         gradientLayer.frame = view.bounds
+    }
+    
+    // MARK: - Search Setup
+    private func setupSearchController() {
+        searchController.searchBar.delegate = self
+        searchController.searchBar.placeholder = "Film ara..."
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        
+        let textFieldInsideSearchBar = searchController.searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = .white
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = true // Aşağı kaydırınca gizlenir, yukarı çekince gelir
     }
     
     // MARK: - setupUI
@@ -208,5 +224,17 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         generator.impactOccurred()
         
         coordinator?.showMovieDetail(movie: movie)
+    }
+}
+
+// MARK: - UISearchBarDelegate
+extension HomeViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let movieTitle = searchBar.text, !movieTitle.isEmpty else { return }
+        searchController.isActive = false
+        
+        Task {
+            await viewModel.searchMoviesByTitle(text: movieTitle)
+        }
     }
 }
