@@ -102,6 +102,16 @@ final class AIPromptViewController: UIViewController {
         gradientLayer.frame = view.bounds
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        activityIndicator.stopAnimating()
+        generateButton.isEnabled = true
+        generateButton.alpha = 1.0
+        textField.isEnabled = true
+        textField.text = ""
+    }
+    
     // MARK: - Setup
     private func setupUI() {
         view.layer.insertSublayer(gradientLayer, at: 0)
