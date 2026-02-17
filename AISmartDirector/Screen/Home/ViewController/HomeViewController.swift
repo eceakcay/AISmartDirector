@@ -75,6 +75,7 @@ final class HomeViewController: UIViewController {
         searchController.searchBar.placeholder = "Film ara..."
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.showsCancelButton = true
         
         let textFieldInsideSearchBar = searchController.searchBar.value(forKey: "searchField") as? UITextField
         textFieldInsideSearchBar?.textColor = .white
@@ -235,6 +236,20 @@ extension HomeViewController: UISearchBarDelegate {
         
         Task {
             await viewModel.searchMoviesByTitle(text: movieTitle)
+        }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            Task {
+                await viewModel.loadMovies()
+            }
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        Task {
+            await viewModel.loadMovies()
         }
     }
 }
