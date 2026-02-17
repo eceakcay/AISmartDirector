@@ -11,9 +11,8 @@ import Kingfisher
 
 final class MovieDetailViewController: UIViewController {
     
-    //MARK: - Properties
-    private let movie: Movie
-    private let favoritesManager = FavoritesManager.shared
+    // MARK: - Properties
+    private let viewModel: MovieDetailViewModelProtocol
     
     // MARK: - UI Components
     private let scrollView: UIScrollView = {
@@ -24,7 +23,6 @@ final class MovieDetailViewController: UIViewController {
     
     private let contentView = UIView()
     
-    // Arka plan gradient
     private let gradientLayer: CAGradientLayer = {
         let gradient = CAGradientLayer()
         gradient.colors = [
@@ -33,14 +31,6 @@ final class MovieDetailViewController: UIViewController {
         ]
         gradient.locations = [0.0, 1.0]
         return gradient
-    }()
-    
-    // Header blur effect
-    private let headerBlurView: UIVisualEffectView = {
-        let blur = UIBlurEffect(style: .dark)
-        let view = UIVisualEffectView(effect: blur)
-        view.alpha = 0
-        return view
     }()
     
     private let backdropImageView: UIImageView = {
@@ -133,7 +123,6 @@ final class MovieDetailViewController: UIViewController {
         label.font = .systemFont(ofSize: 15, weight: .regular)
         label.numberOfLines = 0
         label.textColor = UIColor(white: 0.85, alpha: 1.0)
-        label.lineBreakMode = .byWordWrapping
         return label
     }()
     
@@ -143,9 +132,9 @@ final class MovieDetailViewController: UIViewController {
         return view
     }()
     
-    //MARK: - İnit
-    init(movie: Movie) {
-        self.movie = movie
+    // MARK: - Init
+    init(viewModel: MovieDetailViewModelProtocol) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -153,12 +142,12 @@ final class MovieDetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    //MARK: - Lifecycle
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        configure()
         setupNavigationBar()
+        configure()
     }
     
     override func viewDidLayoutSubviews() {
@@ -167,20 +156,13 @@ final class MovieDetailViewController: UIViewController {
         backdropImageView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 400)
     }
     
-    // MARK: - Navigation Bar
     private func setupNavigationBar() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
-        appearance.titleTextAttributes = [
-            .foregroundColor: UIColor.white,
-            .font: UIFont.systemFont(ofSize: 17, weight: .semibold)
-        ]
-        
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.tintColor = .white
         
-        // Back button (sol)
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "chevron.left"),
             style: .plain,
@@ -188,14 +170,12 @@ final class MovieDetailViewController: UIViewController {
             action: #selector(backButtonTapped)
         )
         
-        // ✅ Favorite button (sağ)
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "heart"),
             style: .plain,
             target: self,
             action: #selector(favoriteTapped)
         )
-        
         updateFavoriteUI()
     }
     
@@ -203,69 +183,39 @@ final class MovieDetailViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    @objc private func favoriteTapped() {
+        viewModel.toggleFavorite()
+        updateFavoriteUI()
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+    }
+    
     private func updateFavoriteUI() {
-        let isFav = favoritesManager.isFavorite(id: movie.id)
-        let imageName = isFav ? "heart.fill" : "heart"
-        
-        // ✅ Navigation bar item'ı güncelle
-        navigationItem.rightBarButtonItem?.image = UIImage(systemName: imageName)
-        
-        // Renk değişimi (opsiyonel)
+        let isFav = viewModel.isFavorite
+        navigationItem.rightBarButtonItem?.image = UIImage(systemName: isFav ? "heart.fill" : "heart")
         navigationItem.rightBarButtonItem?.tintColor = isFav ? .systemPink : .white
     }
     
-    @objc private func favoriteTapped() {
-        FavoritesManager.shared.toggleFavorite(id: movie.id)
-        updateFavoriteUI()
-        
-        // ✅ Haptic feedback
-        let generator = UIImpactFeedbackGenerator(style: .medium)
-        generator.impactOccurred()
-        
-        // ✅ Animasyon efekti
-        UIView.animate(withDuration: 0.1,
-                       animations: {
-                           self.navigationItem.rightBarButtonItem?.customView?.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-                       }) { _ in
-            UIView.animate(withDuration: 0.1) {
-                self.navigationItem.rightBarButtonItem?.customView?.transform = .identity
-            }
-        }
-    }
-    
-    // MARK: - UI Setup
     private func setupUI() {
-        // Gradient background
         view.layer.insertSublayer(gradientLayer, at: 0)
-        
-        // Backdrop image (bulanık arka plan)
         view.addSubview(backdropImageView)
-        
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
+        [posterContainerView, titleLabel, releaseDateLabel, ratingContainer, dividerView, overviewTitleLabel, overviewLabel].forEach {
+            contentView.addSubview($0)
+        }
+        
         posterContainerView.addSubview(posterImageView)
-        
-        contentView.addSubview(posterContainerView)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(releaseDateLabel)
-        contentView.addSubview(ratingContainer)
-        
-        ratingContainer.addSubview(starImageView)
-        ratingContainer.addSubview(ratingLabel)
-        ratingContainer.addSubview(ratingCountLabel)
-        
-        contentView.addSubview(dividerView)
-        contentView.addSubview(overviewTitleLabel)
-        contentView.addSubview(overviewLabel)
+        [starImageView, ratingLabel, ratingCountLabel].forEach {
+            ratingContainer.addSubview($0)
+        }
         
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
 
         contentView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-            make.width.equalToSuperview()
+            make.edges.width.equalToSuperview()
         }
         
         posterContainerView.snp.makeConstraints { make in
@@ -293,7 +243,6 @@ final class MovieDetailViewController: UIViewController {
             make.top.equalTo(releaseDateLabel.snp.bottom).offset(16)
             make.centerX.equalToSuperview()
             make.height.equalTo(50)
-            make.width.greaterThanOrEqualTo(100)
         }
         
         starImageView.snp.makeConstraints { make in
@@ -331,45 +280,13 @@ final class MovieDetailViewController: UIViewController {
         }
     }
     
-    // MARK: - Configure
     private func configure() {
-        titleLabel.text = movie.title
-        overviewLabel.text = movie.overview ?? "Bu film için henüz bir açıklama eklenmemiş."
-
-        if let releaseDate = movie.releaseDate {
-            let df = DateFormatter()
-            df.dateFormat = "yyyy-MM-dd"
-            if let date = df.date(from: releaseDate) {
-                df.locale = Locale(identifier: "tr_TR")
-                df.dateFormat = "dd MMMM yyyy"
-                releaseDateLabel.text = "📅 " + df.string(from: date)
-            }
-        }
-
-        if let rating = movie.voteAverage {
-            ratingLabel.text = String(format: "%.1f", rating)
-            ratingContainer.isHidden = false
-        } else {
-            ratingContainer.isHidden = true
-        }
-
-        // 🎯 Kingfisher
-        posterImageView.kf.setImage(
-            with: movie.posterURL,
-            placeholder: UIImage(systemName: "photo"),
-            options: [.transition(.fade(0.4))]
-        )
-
-        backdropImageView.kf.setImage(
-            with: movie.posterURL,
-            options: [
-                .transition(.fade(0.4)),
-                .processor(
-                    BlurImageProcessor(blurRadius: 8)
-                )
-            ]
-        )
+        titleLabel.text = viewModel.movieTitle
+        overviewLabel.text = viewModel.overview
+        releaseDateLabel.text = viewModel.releaseDate
+        ratingLabel.text = viewModel.rating
         
-        updateFavoriteUI()
+        posterImageView.kf.setImage(with: viewModel.posterURL, options: [.transition(.fade(0.4))])
+        backdropImageView.kf.setImage(with: viewModel.posterURL, options: [.transition(.fade(0.4)), .processor(BlurImageProcessor(blurRadius: 8))])
     }
 }
