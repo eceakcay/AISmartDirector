@@ -117,13 +117,37 @@ final class AppCoordinator: Coordinator {
         }
     }
     
-    private func fetchMovies(
-        for categories: [String],
-        movieService: MovieService
-    ) async throws -> [Movie] {
+    private func fetchMovies(for categories: [String],movieService: MovieService) async throws -> [Movie] {
+        
+        // 1. Kategorileri ID'lere çeviriyoruz
         let genreIds = GenreMapper.mapNamesToIds(categories)
         guard !genreIds.isEmpty else { return [] }
-        return try await movieService.fetchMoviesByGenreIDs(genreIds)
+        
+        // 2. TaskGroup ile paralel istekleri başlatıyoruz
+        return try await withThrowingTaskGroup(of: [Movie].self) { group in
+            
+            for id in genreIds {
+                // Her bir tür için bağımsız bir görev (task) ekliyoruz
+                group.addTask {
+                    // MovieService içindeki metodun tekli bir ID listesi aldığından emin ol
+                    return try await movieService.fetchMoviesByGenreIDs([id])
+                }
+            }
+            
+            var allMovies: [Movie] = []
+            
+            // Görevler bittikçe sonuçları topluyoruz
+            for try await movies in group {
+                allMovies.append(contentsOf: movies)
+            }
+            
+            // 3. Veri Temizliği: Aynı film farklı kategorilerde olabilir, mükerrer kayıtları sil
+            // Not: Movie modelinin Hashable olması gerekir.
+            let uniqueMovies = Array(Set(allMovies))
+            
+            // Popülerliğe göre sıralayıp ilk 20 tanesini dönelim
+            return uniqueMovies.sorted(by: { $0.voteAverage ?? 0 > $1.voteAverage ?? 0 }).prefix(20).map { $0 }
+        }
     }
     
     func showAIPrompt() {
