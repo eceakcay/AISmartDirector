@@ -66,6 +66,7 @@ cd AISmartDirector
 ```
 
 **4. Projeyi Xcode üzerinden çalıştırın.**
+AISmartDirector.xcodeproj (veya varsa .xcworkspace) dosyasını Xcode ile açın ve Cmd + R ile çalıştırın.
 
 ---
 
