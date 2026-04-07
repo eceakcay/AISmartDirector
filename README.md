@@ -29,16 +29,14 @@ Proje, sürdürülebilirlik ve test edilebilirlik prensiplerine uygun olarak **M
 
 ```text
 AISmartDirector/
-├── Core/
-│   ├── Network/          # NetworkManager & MovieService
-│   ├── Models/           # Movie & API Models
-│   └── Utilities/        # GenreMapper & Helpers
-├── Screens/
-│   ├── Home/             # Ana Ekran & Arama
-│   ├── Detail/           # Film Detay & MVVM
-│   └── AIAsistant/       # AI Prompt & Öneri Akışı
-└── App/
-    └── Coordinator/      # AppCoordinator (Navigasyon)
+├── App/               # AppDelegate, SceneDelegate, başlangıç konfigürasyonları
+├── Core/              # Network, Model ve yardımcı araçlar
+├── Navigation/        # Coordinator Pattern (AppCoordinator vb.)
+├── Resources/         # Assets, Colors, Localizable vs.
+├── Screen/            # Tüm ekranlar (Home, Detail, AI Assistant)
+├── Services/          # API servisleri (Gemini, TMDB)
+├── Test/              # Unit testler
+├── Secrets/           # API key ve hassas bilgiler (plist)
     
 ```
 
