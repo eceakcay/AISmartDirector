@@ -42,26 +42,30 @@ AISmartDirector/
 
 ## 🚀 Kurulum
 
-Projeyi klonlayın:
+**1. Projeyi klonlayın:**
+```bash
 git clone https://github.com/eceakcay/AISmartDirector.git
+cd AISmartDirector
+```
 
-Bağımlılıkları yükleyin (SPM veya CocoaPods).
+**2. Bağımlılıkları yükleyin** (SPM veya CocoaPods).
 
-Secrets.plist dosyasını oluşturun ve API anahtarlarınızı ekleyin:
+**3. `Secrets.plist` dosyasını oluşturun** ve API anahtarlarınızı ekleyin:
+```xml
 
-<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>GEMINI_API_KEY</key>
-    <string>YOUR_API_KEY</string>
-</dict>
-</plist>
 
-Projeyi Xcode üzerinden çalıştırın.
+
+    GEMINI_API_KEY
+    YOUR_API_KEY
+
+
+```
+
+**4. Projeyi Xcode üzerinden çalıştırın.**
 
 ---
 
 ## 👩‍💻 Geliştirici
 
-Ece Akçay - Bilgisayar Mühendisliği Öğrencisi & iOS Developer
+**Ece Akçay** — Bilgisayar Mühendisliği Öğrencisi & iOS Developer
