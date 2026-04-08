@@ -8,6 +8,7 @@
 import Foundation
 @testable import AISmartDirector
 
+//MOCK SERVİCE
 final class MockMovieService: MovieServiceProtocol {
     
     // Fonksiyonların çağrılıp çağrılmadığını kontrol etmek için "bayraklar" (flags)

@@ -8,6 +8,7 @@
 import XCTest
 @testable import AISmartDirector
 
+///Kullanıcı ‘Inception’ diye arama yaptığında, searchMovieByName fonksiyonu gerçekten çağrılıyor mu ve sorgu doğru şekilde servise iletiliyor mu?”
 final class MovieServiceTests: XCTestCase {
     
     var mockService: MockMovieService!

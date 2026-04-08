@@ -35,11 +35,36 @@ AISmartDirector/
 ├── Resources/         # Assets, Colors, Localizable vs.
 ├── Screen/            # Tüm ekranlar (Home, Detail, AI Assistant)
 ├── Services/          # API servisleri (Gemini, TMDB)
-├── Test/              # Unit testler
+├── Test/              # Unit & Mocking test senaryoları (XCTest)
 ├── Secrets/           # API key ve hassas bilgiler (plist)
     
 ```
+## 🧪 Test Stratejisi & Kalite Güvencesi
 
+Projenin güvenilirliğini ve uzun vadeli bakım kolaylığını sağlamak amacıyla **Unit Test** süreçleri titizlikle kurgulanmıştır.
+
+### Birim Testleri (Unit Testing)
+Uygulamanın temel mantığı, Apple’ın **XCTest** çatısı kullanılarak kapsamlı bir şekilde test edilmektedir. Özellikle AI tarafından üretilen film kategorilerini TMDB’nin beklediği kategori ID’lerine dönüştüren **GenreMapper** gibi kritik bileşenler test kapsamına alınmıştır.
+
+### Mocking & Dependency Injection
+`MovieServiceProtocol` kullanılarak geliştirilen **MockMovieService** sayesinde, network katmanı tamamen izole edilmiştir. Bu sayede:
+- Testler internet bağlantısına ihtiyaç duymaz,
+- Testler çok daha hızlı çalışır,
+- Dış bağımlılıklar (API çağrıları) nedeniyle testler kırılgan hale gelmez,
+- Gerçek servis yerine kontrollü ve öngörülebilir davranışlar test edilebilir.
+
+### Given-When-Then Disiplini
+Tüm test senaryoları, kod okunabilirliğini ve profesyonel yazılım mühendisliği standartlarını korumak amacıyla **Given-When-Then** (GWT) yapısıyla yazılmıştır. Bu yaklaşım sayesinde testlerin amacı, akışı ve beklenen sonucu net bir şekilde anlaşılır.
+
+---
+
+**Kullanılan Test Yaklaşımları:**
+- **Unit Testing** ile çekirdek mantığın doğrulanması
+- **Mocking** ile izolasyon ve hız
+- **Given-When-Then** ile okunabilir ve sürdürülebilir test kodları
+
+---
+  
 ## 🚀 Kurulum
 
 **1. Projeyi klonlayın:**
@@ -71,6 +96,6 @@ AISmartDirector.xcodeproj (veya varsa .xcworkspace) dosyasını Xcode ile açın
 
 ---
 
-## 👩‍💻 Geliştirici
+## 👩🏻‍💻 Geliştirici
 
 **Ece Akçay** — Bilgisayar Mühendisliği Öğrencisi & iOS Developer
