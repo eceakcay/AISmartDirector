@@ -42,8 +42,8 @@
 			membershipExceptions = (
 				Resources/Info.plist,
 				Test/AISmartDirectorTests/AISmartDirectorTests.swift,
-				Test/AISmartDirectorUITests/AISmartDirectorUITests.swift,
-				Test/AISmartDirectorUITests/AISmartDirectorUITestsLaunchTests.swift,
+				Test/AISmartDirectorTests/MovieServiceTests.swift,
+				Test/MockMovieService.swift,
 			);
 			target = 30030D9B2F35F0DF002E366D /* AISmartDirector */;
 		};
@@ -51,16 +51,10 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Test/AISmartDirectorTests/AISmartDirectorTests.swift,
+				Test/AISmartDirectorTests/MovieServiceTests.swift,
+				Test/MockMovieService.swift,
 			);
 			target = 30030DB42F35F0E0002E366D /* AISmartDirectorTests */;
-		};
-		30030DE32F35F17E002E366D /* Exceptions for "AISmartDirector" folder in "AISmartDirectorUITests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Test/AISmartDirectorUITests/AISmartDirectorUITests.swift,
-				Test/AISmartDirectorUITests/AISmartDirectorUITestsLaunchTests.swift,
-			);
-			target = 30030DBE2F35F0E0002E366D /* AISmartDirectorUITests */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -70,7 +64,6 @@
 			exceptions = (
 				30030DC72F35F0E0002E366D /* Exceptions for "AISmartDirector" folder in "AISmartDirector" target */,
 				30030DDD2F35F17C002E366D /* Exceptions for "AISmartDirector" folder in "AISmartDirectorTests" target */,
-				30030DE32F35F17E002E366D /* Exceptions for "AISmartDirector" folder in "AISmartDirectorUITests" target */,
 			);
 			path = AISmartDirector;
 			sourceTree = "<group>";
