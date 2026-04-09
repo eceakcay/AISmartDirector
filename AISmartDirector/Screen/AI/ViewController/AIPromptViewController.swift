@@ -186,6 +186,24 @@ final class AIPromptViewController: UIViewController {
         view.endEditing(true)
     }
     
+    // MARK: - API Hata Gösterimi
+    func showAIError(_ message: String) {
+        // UI işlemleri ana thread'de olmalı
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            self.generateButton.isEnabled = true
+            self.textField.isEnabled = true
+            
+            let alert = UIAlertController(
+                title: "AI Meşgul",
+                message: message,
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "Tekrar Dene", style: .default))
+            self.present(alert, animated: true)
+        }
+    }
+    
     // MARK: - Actions
     @objc private func generateTapped() {
         guard let text = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines),

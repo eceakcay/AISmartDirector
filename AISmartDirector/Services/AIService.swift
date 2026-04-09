@@ -7,6 +7,27 @@
 
 import Foundation
 
+enum AIError: LocalizedError {
+    case serviceBusy    // 503 Hatası için
+    case invalidResponse
+    case modelNotFound
+    case unknown(String)
+
+    var errorDescription: String? {
+        switch self {
+        case .serviceBusy:
+            return "Yapay zeka şu an çok yoğun. Lütfen birkaç saniye sonra tekrar deneyin."
+        case .invalidResponse:
+            return "Beklenmedik bir yanıt alındı."
+        case .modelNotFound:
+            return "Uygun yapay zeka modeli bulunamadı."
+        case .unknown(let message):
+            return message
+        }
+    }
+}
+
+
 protocol AIServiceProtocol {
     func extractCategories(from prompt: String) async throws -> [String]
 }
@@ -53,9 +74,14 @@ final class AIService: AIServiceProtocol {
             print("📊 Status Code: \(httpResponse.statusCode)")
             
             if httpResponse.statusCode != 200 {
+                if httpResponse.statusCode == 503 {
+                    print("⚠️ Sunucu Meşgul (503)")
+                    throw AIError.serviceBusy // İşte özel hatamız!
+                }
+                
                 let errorJson = String(data: data, encoding: .utf8) ?? "Detay yok"
                 print("❌ API HATASI: \(errorJson)")
-                throw NSError(domain: "AIService", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: "API Hatası"])
+                throw AIError.unknown("API Hatası: \(httpResponse.statusCode)")
             }
             
             // 4. ADIM: Parse Et
