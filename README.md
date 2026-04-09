@@ -64,34 +64,6 @@ Tüm test senaryoları, kod okunabilirliğini ve profesyonel yazılım mühendis
 - **Given-When-Then** ile okunabilir ve sürdürülebilir test kodları
 
 ---
-
-## 📸 Ekran Görüntüleri
-
-<p align="center">
-  <img src="Screenshots/screenshot1.png" width="180">
-  <img src="Screenshots/screenshot2.png" width="180">
-  <img src="Screenshots/screenshot3.png" width="180">
-</p>
-
-<p align="center">
-  <sub><b>Ana Ekran</b> &nbsp;&nbsp;&nbsp;&nbsp; 
-  <b>Film Detay</b> &nbsp;&nbsp;&nbsp;&nbsp; 
-  <b>Favoriler</b></sub>
-</p>
-
-<br>
-
-<p align="center">
-  <img src="Screenshots/screenshot4.png" width="180">
-  <img src="Screenshots/screenshot5.png" width="180">
-</p>
-
-<p align="center">
-  <sub><b>AI Asistan</b> &nbsp;&nbsp;&nbsp;&nbsp; 
-  <b>AI Sonuç</b></sub>
-</p>
-
----
   
 ## 🚀 Kurulum
 
@@ -121,6 +93,15 @@ cd AISmartDirector
 **4. Projeyi Xcode üzerinden çalıştırın.**
 
 AISmartDirector.xcodeproj (veya varsa .xcworkspace) dosyasını Xcode ile açın ve Cmd + R ile çalıştırın.
+
+---
+## 📸 App Preview
+
+| 🏠 Ana Ekran | 🎬 Film Detay | ❤️ Favoriler | 🤖 AI Asistan | ✨ AI Önerileri |
+|-------------|-------------|-------------|-------------|---------------|
+| ![home](Screenshots/screenshot1.png) | ![detail](Screenshots/screenshot2.png) | ![favorites](Screenshots/screenshot3.png) | ![ai](Screenshots/screenshot4.png) | ![ai-results](Screenshots/screenshot5.png) |
+
+> Gerçek cihaz üzerinde alınmış ekran görüntüleridir.
 
 ---
 
