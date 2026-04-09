@@ -68,11 +68,14 @@ Tüm test senaryoları, kod okunabilirliğini ve profesyonel yazılım mühendis
 ## 📸 Ekran Görüntüleri
 
 <p align="center">
-  <img src="Screenshots/screenshot1.png" width="170" title="Ana Ekran">
-  <img src="Screenshots/screenshot2.png" width="170" title="Film Detay">
-  <img src="Screenshots/screenshot3.png" width="170" title="Favoriler">
-  <img src="Screenshots/screenshot4.png" width="170" title="AI Asistan">
-  <img src="Screenshots/screenshot5.png" width="170" title="AI Sonuç Ekranı">
+  <img src="Screenshots/AnaEkran.png" width="160" title="Ana Ekran" alt="Ana Ekran">
+  &nbsp;&nbsp;&nbsp;&nbsp; <img src="Screenshots/FilmDetay.png" width="160" title="Film Detay" alt="Film Detay">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="Screenshots/Favoriler.png" width="160" title="Favoriler" alt="Favoriler">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="Screenshots/AIAsistan.png" width="160" title="AI Asistan" alt="AI Asistan">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="Screenshots/AISonuçEkranı.png" width="160" title="AI Sonuç Ekranı" alt="AI Sonuç Ekranı">
 </p>
 
 ---
